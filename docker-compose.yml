@@ -1,0 +1,11 @@
+version: "3.9"
+services:
+  wordpress:
+    # Here you put configuration of continer for Load balancer that would handle traffic to wordpress. Ports of webserver should be exposed to lacalhost
+    #...
+  wordpress:
+    # Here you put configuration of continer for wordpress that would use image that you build.
+    # ...
+  database:
+    # Here you put configuration of continer for MySQL that would use any mysql image you like
+    #...
