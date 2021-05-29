@@ -19,6 +19,8 @@ services:
     volumes:
       - ./wp-content/:/var/www/app/wordpress/wp-content
     env_file: .env
+    environment:
+      - SLEEP_TIME=18
     depends_on:
       - database
 
