@@ -24,6 +24,18 @@ services:
     depends_on:
       - database
 
+  wordpress2:
+    build: .
+    ports:
+      - "6062:80"
+    restart: always
+    volumes:
+      - ./wp-content/:/var/www/app/wordpress/wp-content
+    env_file: .env
+    environment:
+      - SLEEP_TIME=28
+    depends_on:
+      - database
 
   loadbalancer:
     image: nginx:latest
@@ -33,6 +45,7 @@ services:
     - ./nginx/:/etc/nginx/conf.d/
     depends_on:
       - wordpress
+      - wordpress2
 
 volumes:
   dbdata:
