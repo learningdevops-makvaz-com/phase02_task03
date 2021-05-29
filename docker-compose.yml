@@ -9,20 +9,39 @@ services:
     volumes:
       - dbdata:/var/lib/mysql
     command: '--default-authentication-plugin=mysql_native_password'
-  
+ 
 
   wordpress:
     build: .
-    #image: danpaldev/wp-pluginv9:2179fd0
     ports:
-      - "80:80"
+      - "6060:80"
     restart: always
     volumes:
-      - wordpress:/var/www/app/wordpress
+      - ./wp-content/:/var/www/app/wordpress/wp-content
     env_file: .env
     depends_on:
       - database
 
+  wordpress_instance2:
+    build: .
+    ports:
+      - "6061:80"
+    restart: always
+    volumes:
+      - ./wp-content/:/var/www/app/wordpress/wp-content
+    env_file: .env
+    depends_on:
+      - database
+
+  loadbalancer:
+    image: nginx:latest
+    ports:
+    - "80:80"
+    volumes:
+    - ./nginx/:/etc/nginx/conf.d/
+    depends_on:
+      - wordpress
+      - wordpress_instance2
+
 volumes:
   dbdata:
-  wordpress: 
