@@ -22,16 +22,6 @@ services:
     depends_on:
       - database
 
-  wordpress_instance2:
-    build: .
-    ports:
-      - "6061:80"
-    restart: always
-    volumes:
-      - ./wp-content/:/var/www/app/wordpress/wp-content
-    env_file: .env
-    depends_on:
-      - database
 
   loadbalancer:
     image: nginx:latest
@@ -41,7 +31,6 @@ services:
     - ./nginx/:/etc/nginx/conf.d/
     depends_on:
       - wordpress
-      - wordpress_instance2
 
 volumes:
   dbdata:
