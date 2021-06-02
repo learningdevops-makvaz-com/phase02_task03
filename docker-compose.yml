@@ -20,7 +20,7 @@ services:
       - SLEEP_TIME=18
     deploy:
       mode: replicated
-      replicas: 2
+      replicas: 3
     depends_on:
       - database
 
