@@ -1,0 +1,10 @@
+# How can I add an empty directory to a Git repository?
+# https://stackoverflow.com/a/932982/13954598
+
+#This empty directory needs to be added as docker-compose don't
+#create a relative volume directory by default.
+
+# Ignore everything in this directory
+*
+# Except this file
+!.gitignore
